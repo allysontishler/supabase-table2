@@ -2,14 +2,12 @@ require('dotenv').config();
 
 import { createClient } from '@supabase/supabase-js';
 
-// Ensure that `process` object is available
-const supabaseKey = process && process.env && process.env.SUPABASE_KEY;
+const supabaseUrl = 'https://hgviinnynoibggdyeynm.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY;
 
-// Check if Supabase key is available
 if (!supabaseKey) {
   console.error('Supabase key is missing or invalid.');
 } else {
-  const supabaseUrl = 'https://hgviinnynoibggdyeynm.supabase.co';
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   async function getBooks() {
@@ -23,6 +21,11 @@ if (!supabaseKey) {
       }
 
       const bookList = document.getElementById('books');
+
+      if (!books || books.length === 0) {
+        console.log('No books found.');
+        return;
+      }
 
       books.forEach(book => {
         const row = document.createElement('tr');
@@ -40,3 +43,4 @@ if (!supabaseKey) {
 
   getBooks();
 }
+
