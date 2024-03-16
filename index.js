@@ -9,10 +9,6 @@ async function getBooks() {
       .from('books')
       .select('*');
 
-    if (error) {
-      throw error;
-    }
-
     const bookList = document.getElementById('books');
 
     books.forEach(book => {
